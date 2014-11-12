@@ -1,6 +1,4 @@
-var Catalyst = require("./catalyst.jsx")({
-	numColumns: 12
-});
+var Catalyst = require("./catalyst.jsx")();
 
 var App = React.createClass({
 	render: function(){
@@ -18,24 +16,24 @@ var App = React.createClass({
 		}
 
 		return (
-			<Catalyst.Grid>
-				<Catalyst.Grid style={header}>
+			<Catalyst size={12}>
+				<Catalyst size={12} style={header}>
 					Header
-				</Catalyst.Grid>
-				<Catalyst.Grid>
-					<Catalyst.Col.Eight style={mainColumns}>
-						<Catalyst.Col.Six>
+				</Catalyst>
+				<Catalyst size={12}>
+					<Catalyst size={8} style={mainColumns}>
+						<Catalyst size={4}>
 							Left Content
-						</Catalyst.Col.Six>
-						<Catalyst.Col.Six>
+						</Catalyst>
+						<Catalyst size={4}>
 							Right Content
-						</Catalyst.Col.Six>
-					</Catalyst.Col.Eight>	
-					<Catalyst.Col.Four  style={mainColumns}>
+						</Catalyst>
+					</Catalyst>	
+					<Catalyst size={4}  style={mainColumns}>
 						Side Bar
-					</Catalyst.Col.Four>
-				</Catalyst.Grid>
-			</Catalyst.Grid>
+					</Catalyst>
+				</Catalyst>
+			</Catalyst>
 		);
 	}
 })
