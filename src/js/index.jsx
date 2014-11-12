@@ -1,4 +1,6 @@
-var Catalyst = require("./catalyst.jsx")();
+var Catalyst = require("./catalyst.jsx")({
+	numColumns: 12
+});
 
 var App = React.createClass({
 	render: function(){

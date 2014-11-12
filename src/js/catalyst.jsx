@@ -9,7 +9,7 @@ module.exports = function(opts){
 		},
 		render: function(){
 
-			var max = this.props.max || this.props.size;
+			var max = this.props.max || opts.numColumns;
 			var size = this.props.size;
 
 			var percentWidth = (100/max) * size;
