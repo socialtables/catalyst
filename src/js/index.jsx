@@ -23,15 +23,15 @@ var App = React.createClass({
 					Header
 				</Catalyst>
 				<Catalyst size={12}>
-					<Catalyst size={8} style={mainColumns}>
-						<Catalyst size={4}>
+					<Catalyst size={[12,12,6,8]} style={mainColumns}>
+						<Catalyst size={[12,12,3,4]}>
 							Left Content
 						</Catalyst>
-						<Catalyst size={4}>
+						<Catalyst size={[12,12,3,4]}>
 							Right Content
 						</Catalyst>
 					</Catalyst>	
-					<Catalyst size={4}  style={mainColumns}>
+					<Catalyst size={[12,12,6,4]} style={mainColumns}>
 						Side Bar
 					</Catalyst>
 				</Catalyst>
