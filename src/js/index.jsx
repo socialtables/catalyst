@@ -1,5 +1,6 @@
 var Catalyst = require("./catalyst.jsx")({
-	numColumns: 12
+	widths:[1200, 800, 400],
+	columns:[12,8,4]
 });
 
 var App = React.createClass({
@@ -18,20 +19,20 @@ var App = React.createClass({
 		}
 
 		return (
-			<Catalyst size={12}>
-				<Catalyst size={12} style={header}>
+			<Catalyst sizes={[12]}>
+				<Catalyst sizes={[12]} style={header}>
 					Header
 				</Catalyst>
-				<Catalyst size={12}>
-					<Catalyst size={8} style={mainColumns}>
-						<Catalyst size={4}>
+				<Catalyst sizes={[12]}>
+					<Catalyst sizes={[8]} style={mainColumns}>
+						<Catalyst sizes={[4]}>
 							Left Content
 						</Catalyst>
-						<Catalyst size={4}>
+						<Catalyst sizes={[4]}>
 							Right Content
 						</Catalyst>
 					</Catalyst>	
-					<Catalyst size={4}  style={mainColumns}>
+					<Catalyst sizes={[4]}  style={mainColumns}>
 						Side Bar
 					</Catalyst>
 				</Catalyst>
