@@ -1,4 +1,4 @@
-var mergeStyles = require("./mergeStyles");
+var mergeStyles = require("./merge-styles");
 
 module.exports = function(opts){
 	return React.createClass({
@@ -16,7 +16,8 @@ module.exports = function(opts){
 				style: {},
 				max: opts.numColumns || 12,
 				size: opts.defaultUnitSize || 12,
-				breakPoints: opts.breakPoints || [300,600,1000]
+				breakPoints: opts.breakPoints || [300,600,1000],
+				styleSet: require("./styles/default.js")
 			}
 		},
 		getWindowWidth: function(){
@@ -37,26 +38,11 @@ module.exports = function(opts){
 			}
 			size = this.props.size[sizeIndex] || this.props.size;
 
-			var max = this.props.max;
+			var percentWidth = (100/this.props.max) * size;
 
-			var percentWidth = (100/max) * size;
-			
-			var outer = {
-				width: percentWidth+"%",
-				float: "left",
-			}
-
-			var always = {
-				overflow: "auto"
-			}
-
-			var defaults = {
-				margin: "2px",
-				padding: "2px",
-				backgroundColor: "#efefef"
-			}
-
-			var inner = mergeStyles(defaults, this.props.style, always);
+			var inner = mergeStyles(this.props.styleSet.defaults,
+									this.props.style, 
+									this.props.styleSet.always);
 
 			React.Children.forEach(this.props.children, function(child){
 				if(child.props){
@@ -65,7 +51,7 @@ module.exports = function(opts){
 			});
 
 			return (
-				<div style={outer}>
+				<div style={this.props.styleSet.outer(percentWidth)}>
 					<div style={inner}>
 						{this.props.children}
 					</div>
