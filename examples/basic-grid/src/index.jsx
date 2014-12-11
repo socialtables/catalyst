@@ -16,22 +16,25 @@ var App = React.createClass({
 		var mainColumns = {
 			backgroundColor: "#239840"
 		}
+		var sideBar = {
+			backgroundColor: "cornflowerblue"
+		}
 
 		return (
-			<Catalyst size={12}>
-				<Catalyst size={12} style={header}>
+			<Catalyst>
+				<Catalyst style={header}>
 					Header
 				</Catalyst>
-				<Catalyst size={12}>
+				<Catalyst>
 					<Catalyst size={[12,12,6,8]} style={mainColumns}>
-						<Catalyst size={[12,12,3,4]}>
+						<Catalyst size={[12,12,6,6]}>
 							Left Content
 						</Catalyst>
-						<Catalyst size={[12,12,3,4]}>
+						<Catalyst size={[12,12,6,6]}>
 							Right Content
 						</Catalyst>
 					</Catalyst>	
-					<Catalyst size={[12,12,6,4]} style={mainColumns}>
+					<Catalyst size={[12,12,6,4]} style={sideBar}>
 						Side Bar
 					</Catalyst>
 				</Catalyst>

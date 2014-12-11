@@ -4,6 +4,8 @@
   "description": "catalyst ========",
   "main": "index.js",
   "dependencies": {
+    "flux": "~2.0.1",
+    "keymirror": "~0.1.0"
   },
   "devDependencies": {
     "browserify": "^6.3.2",
@@ -22,7 +24,9 @@
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/test/preprocessor.js",
-    "unmockedModulePathPatterns": ["<rootDir>/node_modules/react"]
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ]
   },
   "repository": {
     "type": "git",

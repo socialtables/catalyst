@@ -1,58 +1,69 @@
 var mergeStyles = require("./merge-styles");
+var ResponsiveStore = require('./stores/ResponsiveStore');
+var ResponsiveActionCreators = require('./actions/ResponsiveActionCreators');
 
 module.exports = function(opts){
+	// defaults
+	var defaultStyleSet = opts.styleSet || require("./styles/default.js");
+	var defaultMax = opts.numColumns || 12;
+	var defaultUnitSize = opts.defaultUnitSize || 12;
+	var defaultBreakPoints = opts.breakPoints || [300,600,1000];
+	var defaultDisplayName = opts.displayName || "Catalyst";
+
+	// set up responsive listener to create an action for Flux.
+	resize();
+	window.addEventListener( 'resize', resize, false );
+	function resize(){
+		ResponsiveActionCreators.resize(defaultBreakPoints);
+	}
+
+	// function read stores
+	function getResponsiveState() {
+		return ResponsiveStore.getAll();
+	}
+
+	// final React component that gets returned.
 	return React.createClass({
-		componentDidMount: function(){
-			window.addEventListener( 'resize', this.resize, false );
-		},
-		resize: function(){
-			var self = this;
-			window.requestAnimationFrame(function(){
-				self.forceUpdate();
-			});
-		},
+		displayName: defaultDisplayName, // shows this name in React dev tools
+
+		// Defaults
 		getDefaultProps: function(){
 			return {
 				style: {},
-				max: opts.numColumns || 12,
-				size: opts.defaultUnitSize || 12,
-				breakPoints: opts.breakPoints || [300,600,1000],
-				styleSet: require("./styles/default.js")
+				styleSet: defaultStyleSet,
+				max: defaultMax,
+				size: defaultUnitSize,
+				breakPoints: defaultBreakPoints,
+				isTopCatalystComponent: true
 			}
 		},
-		getWindowWidth: function(){
-			return window.innerWidth;
+		getInitialState: function(){
+			return getResponsiveState();
+		},
+
+		// Other lifecycle events
+		componentDidMount: function(){
+			// when component first mounts it sets event listeners to allow for responsive design
+			ResponsiveStore.addChangeListener(this._onChange);
 		},
 		componentWillUnmount: function(){
-			window.removeEventListener( 'resize', this.resize, false );
+			// cleaning up event listenrs
+			ResponsiveStore.removeChangeListener(this._onChange);
 		},
+		_onChange: function() {
+			this.setState(getResponsiveState());
+		},
+
+
 		render: function(){
-
-			var sizeIndex = 0;
-			if(this.props.size instanceof Array){
-				this.props.breakPoints.forEach(function(breakPoint){
-					if(breakPoint < this.getWindowWidth()){
-						sizeIndex++;
-					}
-				}, this);
-			}
-			size = this.props.size[sizeIndex] || this.props.size;
-
-			var percentWidth = (100/this.props.max) * size;
-
-			var inner = mergeStyles(this.props.styleSet.defaults,
+			var innerStyle = mergeStyles(this.props.styleSet.defaults(this.props, this.state),
 									this.props.style, 
-									this.props.styleSet.always);
-
-			React.Children.forEach(this.props.children, function(child){
-				if(child.props){
-					child.props.max = size;
-				}
-			});
+									this.props.styleSet.always(this.props, this.state));
+			var outerStyle = this.props.styleSet.outer(this.props, this.state, this);
 
 			return (
-				<div style={this.props.styleSet.outer(percentWidth)}>
-					<div style={inner}>
+				<div style={outerStyle}>
+					<div style={innerStyle}>
 						{this.props.children}
 					</div>
 				</div>

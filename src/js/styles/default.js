@@ -1,15 +1,20 @@
 module.exports = {
-	always: {
-		overflow: "auto"
-	},
-	defaults: {
-		margin: "2px",
-		padding: "2px",
-		backgroundColor: "#efefef"
-	},
-	outer: function(width){
+	always: function(){
 		return {
-			width: width+"%",
+			overflow: "auto"
+		}
+	},
+	defaults: function(){
+		return {
+			margin: "2px",
+			padding: "2px"
+		}
+	},
+	outer: function(props, state, context){
+		var percentWidth = (100/props.max) * (props.size[state.sizeIndex] || props.size);
+
+		return {
+			width: percentWidth+"%",
 			float: "left"
 		}
 	}
