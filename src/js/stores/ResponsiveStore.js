@@ -71,7 +71,6 @@ ResponsiveStore.dispatchToken = CatalystDispatcher.register(function(payload) {
   switch(action.type) {
 
     case ActionTypes.RESIZE:
-      console.log("HEYHEY", action.breakPoints)
       ResponsiveStore.setOnResize(action.breakPoints);
       ResponsiveStore.emitChange();
       break;
