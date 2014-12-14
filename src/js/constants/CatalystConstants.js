@@ -4,7 +4,9 @@ module.exports = {
 
   ActionTypes: keyMirror({
     RESIZE: null,
-    RESIZE_BREAK_POINT: null
+    RESIZE_BREAK_POINT: null,
+    DEVICE_LIGHT: null,
+    GEOLOCATION: null
   }),
 
   PayloadSources: keyMirror({

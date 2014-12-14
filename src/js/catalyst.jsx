@@ -10,12 +10,22 @@ module.exports = function(opts){
 	var defaultBreakPoints = opts.breakPoints || [300,600,1000];
 	var defaultDisplayName = opts.displayName || "Catalyst";
 
-	// set up responsive listener to create an action for Flux.
-	resize();
+	// set up responsive listeners to create actions for Flux.
 	window.addEventListener( 'resize', resize, false );
 	function resize(){
 		ResponsiveActionCreators.resize(defaultBreakPoints);
 	}
+	window.addEventListener('devicelight', deviceLight, false);
+	function deviceLight(event){
+		ResponsiveActionCreators.deviceLight(event.value);
+	}
+	var geolocationId = navigator.geolocation.watchPosition(function(position) {
+		ResponsiveActionCreators.geolocation(position.coords.latitude, position.coords.longitude);
+	});
+
+	// the data that changes on resize always exists,
+	// so we can call it to get initial data.
+	resize();
 
 	// function read stores
 	function getResponsiveState() {
@@ -35,7 +45,7 @@ module.exports = function(opts){
 				size: defaultUnitSize,
 				breakPoints: defaultBreakPoints,
 				isTopCatalystComponent: true
-			}
+			};
 		},
 		getInitialState: function(){
 			return getResponsiveState();
@@ -57,7 +67,7 @@ module.exports = function(opts){
 
 		render: function(){
 			var innerStyle = mergeStyles(this.props.styleSet.defaults(this.props, this.state),
-									this.props.style, 
+									this.props.style,
 									this.props.styleSet.always(this.props, this.state));
 			var outerStyle = this.props.styleSet.outer(this.props, this.state, this);
 

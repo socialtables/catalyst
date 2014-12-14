@@ -16,7 +16,9 @@
     "reactify": "^0.15.2",
     "react-tools": "~0.12.1",
     "jest-cli": "~0.1.18",
-    "webpack": "~1.4.13"
+    "webpack": "~1.4.13",
+    "react": "~0.12.1",
+    "jsx-loader": "~0.12.2"
   },
   "scripts": {
     "test": "gulp test",

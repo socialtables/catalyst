@@ -32,7 +32,7 @@ var ResponsiveStore = assign({}, EventEmitter.prototype, {
   addChangeListener: function(callback) {
     this.on(CHANGE_EVENT, callback);
   },
-  
+
   removeChangeListener: function(callback) {
     this.removeListener(CHANGE_EVENT, callback);
   },
@@ -61,6 +61,13 @@ var ResponsiveStore = assign({}, EventEmitter.prototype, {
       _responsiveData.sizeIndex = index;
     }
     _responsiveData.windowWidth = window.innerWidth;
+  },
+  setOnDeviceLight: function(lux) {
+    _responsiveData.deviceLight = lux;
+  },
+  setOnGeolocation: function(lat, long){
+    _responsiveData.latitude = lat;
+    _responsiveData.longitude = long;
   }
 
 });
@@ -74,7 +81,14 @@ ResponsiveStore.dispatchToken = CatalystDispatcher.register(function(payload) {
       ResponsiveStore.setOnResize(action.breakPoints);
       ResponsiveStore.emitChange();
       break;
-
+    case ActionTypes.DEVICE_LIGHT:
+      ResponsiveStore.setOnDeviceLight(action.lux);
+      ResponsiveStore.emitChange();
+      break;
+    case ActionTypes.GEOLOCATION:
+      ResponsiveStore.setOnGeolocation(action.latitude, action.longitude);
+      ResponsiveStore.emitChange();
+      break;
     default:
       // do nothing
   }
