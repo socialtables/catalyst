@@ -1,8 +1,11 @@
+var React = require('react');
 var mergeStyles = require("./merge-styles");
 var ResponsiveStore = require("./stores/ResponsiveStore");
 var ResponsiveActionCreators = require("./actions/ResponsiveActionCreators");
 
 module.exports = function(opts) {
+	// defensive check for empty function call
+	opts = opts ? opts : {};
 	// defaults
 	var defaultStyleSet = opts.styleSet || require("./styles/default.js");
 	var defaultMax = opts.numColumns || 12;
@@ -11,21 +14,31 @@ module.exports = function(opts) {
 	var defaultDisplayName = opts.displayName || "Catalyst";
 
 	// set up responsive listeners to create actions for Flux.
+	// Resize
 	window.addEventListener("resize", resize, false );
 	function resize() {
 		ResponsiveActionCreators.resize(defaultBreakPoints);
 	}
-	window.addEventListener("devicelight", deviceLight, false);
-	function deviceLight(event) {
-		ResponsiveActionCreators.deviceLight(event.value);
-	}
-	var geolocationId = navigator.geolocation.watchPosition(function(position) {
-		ResponsiveActionCreators.geolocation(position.coords.latitude, position.coords.longitude);
-	});
-
 	// the data that changes on resize always exists,
 	// so we can call it to get initial data.
 	resize();
+
+	// Device Light
+	if ('ondevicelight' in window) {
+		// device light api is supported.
+		window.addEventListener("devicelight", deviceLight, false);
+		function deviceLight(event) {
+			ResponsiveActionCreators.deviceLight(event.value);
+		}
+	}
+
+	// Geolocation
+	if ("geolocation" in navigator) {
+		// geolocation api is supported
+		var geolocationId = navigator.geolocation.watchPosition(function(position) {
+			ResponsiveActionCreators.geolocation(position.coords.latitude, position.coords.longitude);
+		});
+	}
 
 	// function read stores
 	function getResponsiveState() {
@@ -51,7 +64,6 @@ module.exports = function(opts) {
 			return getResponsiveState();
 		},
 
-		// Other lifecycle events
 		componentDidMount: function() {
 			// when component first mounts it sets event listeners to allow for responsive design
 			ResponsiveStore.addChangeListener(this._onChange);
