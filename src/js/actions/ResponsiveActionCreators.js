@@ -1,6 +1,6 @@
-var CatalystDispatcher = require('../dispatcher/CatalystDispatcher');
-var CatalystConstants = require('../constants/CatalystConstants');
-var ResponsiveStore = require('../stores/ResponsiveStore');
+var CatalystDispatcher = require("../dispatcher/CatalystDispatcher");
+var CatalystConstants = require("../constants/CatalystConstants");
+var ResponsiveStore = require("../stores/ResponsiveStore");
 
 var ActionTypes = CatalystConstants.ActionTypes;
 

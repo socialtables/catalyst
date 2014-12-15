@@ -1,5 +1,5 @@
-var CatalystConstants = require('../constants/CatalystConstants');
-var Dispatcher = require('flux').Dispatcher;
+var CatalystConstants = require("../constants/CatalystConstants");
+var Dispatcher = require("flux").Dispatcher;
 var assign = require("react/lib/Object.assign.js");
 
 var PayloadSources = CatalystConstants.PayloadSources;

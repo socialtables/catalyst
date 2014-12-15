@@ -1,4 +1,4 @@
-module.exports = function(name){
+module.exports = function(name) {
   return {
     entry: __dirname + "/../../examples/"+name+"/src/index.jsx",
     output: {

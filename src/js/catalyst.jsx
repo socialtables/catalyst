@@ -1,8 +1,8 @@
 var mergeStyles = require("./merge-styles");
-var ResponsiveStore = require('./stores/ResponsiveStore');
-var ResponsiveActionCreators = require('./actions/ResponsiveActionCreators');
+var ResponsiveStore = require("./stores/ResponsiveStore");
+var ResponsiveActionCreators = require("./actions/ResponsiveActionCreators");
 
-module.exports = function(opts){
+module.exports = function(opts) {
 	// defaults
 	var defaultStyleSet = opts.styleSet || require("./styles/default.js");
 	var defaultMax = opts.numColumns || 12;
@@ -11,12 +11,12 @@ module.exports = function(opts){
 	var defaultDisplayName = opts.displayName || "Catalyst";
 
 	// set up responsive listeners to create actions for Flux.
-	window.addEventListener( 'resize', resize, false );
-	function resize(){
+	window.addEventListener("resize", resize, false );
+	function resize() {
 		ResponsiveActionCreators.resize(defaultBreakPoints);
 	}
-	window.addEventListener('devicelight', deviceLight, false);
-	function deviceLight(event){
+	window.addEventListener("devicelight", deviceLight, false);
+	function deviceLight(event) {
 		ResponsiveActionCreators.deviceLight(event.value);
 	}
 	var geolocationId = navigator.geolocation.watchPosition(function(position) {
@@ -37,7 +37,7 @@ module.exports = function(opts){
 		displayName: defaultDisplayName, // shows this name in React dev tools
 
 		// Defaults
-		getDefaultProps: function(){
+		getDefaultProps: function() {
 			return {
 				style: {},
 				styleSet: defaultStyleSet,
@@ -47,16 +47,16 @@ module.exports = function(opts){
 				isTopCatalystComponent: true
 			};
 		},
-		getInitialState: function(){
+		getInitialState: function() {
 			return getResponsiveState();
 		},
 
 		// Other lifecycle events
-		componentDidMount: function(){
+		componentDidMount: function() {
 			// when component first mounts it sets event listeners to allow for responsive design
 			ResponsiveStore.addChangeListener(this._onChange);
 		},
-		componentWillUnmount: function(){
+		componentWillUnmount: function() {
 			// cleaning up event listenrs
 			ResponsiveStore.removeChangeListener(this._onChange);
 		},
@@ -65,7 +65,7 @@ module.exports = function(opts){
 		},
 
 
-		render: function(){
+		render: function() {
 			var innerStyle = mergeStyles(this.props.styleSet.defaults(this.props, this.state),
 									this.props.style,
 									this.props.styleSet.always(this.props, this.state));

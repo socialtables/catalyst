@@ -10,13 +10,13 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var CatalystDispatcher = require('../dispatcher/CatalystDispatcher');
-var CatalystConstants = require('../constants/CatalystConstants');
-var EventEmitter = require('events').EventEmitter;
+var CatalystDispatcher = require("../dispatcher/CatalystDispatcher");
+var CatalystConstants = require("../constants/CatalystConstants");
+var EventEmitter = require("events").EventEmitter;
 var assign = require("react/lib/Object.assign.js");
 
 var ActionTypes = CatalystConstants.ActionTypes;
-var CHANGE_EVENT = 'change';
+var CHANGE_EVENT = "change";
 
 var _responsiveData = {};
 
@@ -52,12 +52,12 @@ var ResponsiveStore = assign({}, EventEmitter.prototype, {
   setOnResize: function(breakPoints) {
     var innerWidth = window.innerWidth;
     var index = 0;
-    breakPoints.forEach(function(breakPoint){
-      if(breakPoint < innerWidth){
+    breakPoints.forEach(function(breakPoint) {
+      if(breakPoint < innerWidth) {
         index++;
       }
     });
-    if(index !== this.getSizeIndex()){
+    if(index !== this.getSizeIndex()) {
       _responsiveData.sizeIndex = index;
     }
     _responsiveData.windowWidth = window.innerWidth;
@@ -65,7 +65,7 @@ var ResponsiveStore = assign({}, EventEmitter.prototype, {
   setOnDeviceLight: function(lux) {
     _responsiveData.deviceLight = lux;
   },
-  setOnGeolocation: function(lat, long){
+  setOnGeolocation: function(lat, long) {
     _responsiveData.latitude = lat;
     _responsiveData.longitude = long;
   }

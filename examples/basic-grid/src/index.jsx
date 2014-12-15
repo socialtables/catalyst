@@ -3,7 +3,7 @@ var Catalyst = require("../../../src/js/catalyst.jsx")({
 });
 
 var App = React.createClass({
-	render: function(){
+	render: function() {
 
 		var header = {
 			backgroundColor:"#232323",
