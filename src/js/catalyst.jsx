@@ -22,10 +22,9 @@ module.exports = function(opts) {
 	// Device Light
 	if ('ondevicelight' in window) {
 		// device light api is supported.
-		window.addEventListener("devicelight", deviceLight, false);
-		function deviceLight(event) {
+		window.addEventListener("devicelight", function(event) {
 			ResponsiveActionCreators.deviceLight(event.value);
-		}
+		}, false);
 	}
 
 	// Geolocation
