@@ -1,12 +1,12 @@
-jest.dontMock("../merge-styles");
+jest.dontMock("../merge-objects");
 
-describe("merge-styles", function() {
+describe("merge-objects", function() {
 	var merge,
 		object1,
 		object2,
 		object3;
 	beforeEach(function() {
-		merge = require("../merge-styles");
+		merge = require("../merge-objects");
 		object1 = {
 			name: "Mary",
 			profession: {

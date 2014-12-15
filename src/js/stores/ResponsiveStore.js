@@ -45,8 +45,8 @@ var ResponsiveStore = assign({}, EventEmitter.prototype, {
     return _responsiveData.windowWidth;
   },
 
-  getSizeIndex: function() {
-    return _responsiveData.sizeIndex;
+  getWidthIndex: function() {
+    return _responsiveData.widthIndex;
   },
 
   setOnResize: function(breakPoints) {
@@ -57,8 +57,8 @@ var ResponsiveStore = assign({}, EventEmitter.prototype, {
         index++;
       }
     });
-    if(index !== this.getSizeIndex()) {
-      _responsiveData.sizeIndex = index;
+    if(index !== this.getWidthIndex()) {
+      _responsiveData.widthIndex = index;
     }
     _responsiveData.windowWidth = window.innerWidth;
   },

@@ -1,7 +1,8 @@
 jest.dontMock("../catalyst.jsx");
+jest.dontMock("../merge-objects.js");
 
 describe("catalyst", function() {
-	var React = require('react/addons');
+	global.React = require('react/addons');
 	var Catalyst = require("../catalyst.jsx");
 	var TestUtils = React.addons.TestUtils;
 

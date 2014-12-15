@@ -11,7 +11,7 @@ module.exports = {
 		};
 	},
 	outer: function(props, state, context) {
-		var percentWidth = (100/props.max) * (props.size[state.sizeIndex] || props.size);
+		var percentWidth = (100/props.maxWidth) * (props.width[state.widthIndex] || props.width);
 		var opacity = state.deviceLight ? state.deviceLight/50 : 1;
 		var backgroundColor = "red";
 

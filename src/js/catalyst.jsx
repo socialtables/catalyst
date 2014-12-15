@@ -1,23 +1,19 @@
-var React = require('react');
-var mergeStyles = require("./merge-styles");
+var Merge = require("./merge-objects");
 var ResponsiveStore = require("./stores/ResponsiveStore");
 var ResponsiveActionCreators = require("./actions/ResponsiveActionCreators");
 
 module.exports = function(opts) {
 	// defensive check for empty function call
 	opts = opts ? opts : {};
+
 	// defaults
-	var defaultStyleSet = opts.styleSet || require("./styles/default.js");
-	var defaultMax = opts.numColumns || 12;
-	var defaultUnitSize = opts.defaultUnitSize || 12;
-	var defaultBreakPoints = opts.breakPoints || [300,600,1000];
-	var defaultDisplayName = opts.displayName || "Catalyst";
+	var options = Merge(require("./defaults"), opts);
 
 	// set up responsive listeners to create actions for Flux.
 	// Resize
 	window.addEventListener("resize", resize, false );
 	function resize() {
-		ResponsiveActionCreators.resize(defaultBreakPoints);
+		ResponsiveActionCreators.resize(options.breakPoints);
 	}
 	// the data that changes on resize always exists,
 	// so we can call it to get initial data.
@@ -47,17 +43,16 @@ module.exports = function(opts) {
 
 	// final React component that gets returned.
 	return React.createClass({
-		displayName: defaultDisplayName, // shows this name in React dev tools
+		displayName: options.displayName, // shows this name in React dev tools
 
 		// Defaults
 		getDefaultProps: function() {
 			return {
 				style: {},
-				styleSet: defaultStyleSet,
-				max: defaultMax,
-				size: defaultUnitSize,
-				breakPoints: defaultBreakPoints,
-				isTopCatalystComponent: true
+				styleSet: options.styleSet,
+				maxWidth: options.maxWidth,
+				width: options.width,
+				breakPoints: options.breakPoints
 			};
 		},
 		getInitialState: function() {
@@ -78,7 +73,7 @@ module.exports = function(opts) {
 
 
 		render: function() {
-			var innerStyle = mergeStyles(this.props.styleSet.defaults(this.props, this.state),
+			var innerStyle = Merge(this.props.styleSet.defaults(this.props, this.state),
 									this.props.style,
 									this.props.styleSet.always(this.props, this.state));
 			var outerStyle = this.props.styleSet.outer(this.props, this.state, this);
