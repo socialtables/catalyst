@@ -22,19 +22,19 @@ var App = React.createClass({
 
 		return (
 			<Catalyst>
-				<Catalyst style={header}>
+				<Catalyst elementType="header" style={header}>
 					Header
 				</Catalyst>
-				<Catalyst>
-					<Catalyst width={[12,12,6,8]} style={mainColumns}>
-						<Catalyst width={[12,12,6,6]}>
+				<Catalyst elementType="main">
+					<Catalyst elementType="article" width={[12,12,6,8]} style={mainColumns}>
+						<Catalyst elementType="section" width={[12,12,6,6]}>
 							Left Content
 						</Catalyst>
-						<Catalyst width={[12,12,6,6]}>
+						<Catalyst elementType="section" width={[12,12,6,6]}>
 							Right Content
 						</Catalyst>
 					</Catalyst>
-					<Catalyst width={[12,12,6,4]} style={sideBar}>
+					<Catalyst elementType="aside" width={[12,12,6,4]} style={sideBar}>
 						Side Bar
 					</Catalyst>
 				</Catalyst>

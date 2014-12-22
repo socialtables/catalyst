@@ -47,6 +47,8 @@ module.exports = function(opts) {
 		// Defaults
 		getDefaultProps: function() {
 			return {
+				elementType: "div",
+				innerElementType: "div",
 				style: {},
 				styleSet: options.styleSet,
 				maxWidth: options.maxWidth,
@@ -77,12 +79,14 @@ module.exports = function(opts) {
 									this.props.styleSet.always(this.props, this.state));
 			var outerStyle = this.props.styleSet.outer(this.props, this.state, this);
 
+			// using JS to allow for custom type.
+			// TODO find a way to do in JSX
 			return (
-				<div style={outerStyle}>
-					<div style={innerStyle}>
-						{this.props.children}
-					</div>
-				</div>
+				React.createElement(this.props.elementType, {style: outerStyle},
+					React.createElement(this.props.innerElementType, {style: innerStyle},
+						this.props.children
+					)
+				)
 			);
 		}
 	});
