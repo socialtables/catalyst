@@ -47,8 +47,8 @@ module.exports = function(opts) {
 		// Defaults
 		getDefaultProps: function() {
 			return {
-				elementType: "div",
-				innerElementType: "div",
+				elementType: options.elementType,
+				innerElementType: options.innerElementType,
 				style: {},
 				styleSet: options.styleSet,
 				maxWidth: options.maxWidth,

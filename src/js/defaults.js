@@ -1,4 +1,6 @@
 module.exports = {
+  elementType: "div",
+  innerElementType: "div",
   styleSet: require("./styles/default.js"),
   maxWidth: 12,
   width: 12,
