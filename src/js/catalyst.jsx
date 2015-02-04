@@ -20,7 +20,7 @@ module.exports = function(opts) {
 	resize();
 
 	// Device Light
-	if ('ondevicelight' in window) {
+	if ("ondevicelight" in window) {
 		// device light api is supported.
 		window.addEventListener("devicelight", function(event) {
 			ResponsiveActionCreators.deviceLight(event.value);
@@ -47,6 +47,8 @@ module.exports = function(opts) {
 		// Defaults
 		getDefaultProps: function() {
 			return {
+				elementType: options.elementType,
+				innerElementType: options.innerElementType,
 				style: {},
 				styleSet: options.styleSet,
 				maxWidth: options.maxWidth,
@@ -77,12 +79,13 @@ module.exports = function(opts) {
 									this.props.styleSet.always(this.props, this.state));
 			var outerStyle = this.props.styleSet.outer(this.props, this.state, this);
 
+			// using elementType allow for custom HTML tags
 			return (
-				<div style={outerStyle}>
-					<div style={innerStyle}>
+				<this.props.elementType style={outerStyle}>
+					<this.props.innerElementType style={innerStyle}>
 						{this.props.children}
-					</div>
-				</div>
+					</this.props.innerElementType>
+				</this.props.elementType>
 			);
 		}
 	});
