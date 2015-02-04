@@ -20,18 +20,18 @@ module.exports = function(opts) {
 	resize();
 
 	// Device Light
-	if ("ondevicelight" in window) {
-		// device light api is supported.
+	if (options.responsiveDeviceLight && 'ondevicelight' in window) {
+		// opted in and device light api is supported.
 		window.addEventListener("devicelight", function(event) {
 			ResponsiveActionCreators.deviceLight(event.value);
 		}, false);
 	}
 
 	// Geolocation
-	if ("geolocation" in navigator) {
-		// geolocation api is supported
+	if (options.responsiveGeolocation && "geolocation" in navigator) {
+		// opted in and geolocation api is supported
 		var geolocationId = navigator.geolocation.watchPosition(function(position) {
-			ResponsiveActionCreators.geolocation(position.coords.latitude, position.coords.longitude);
+			ResponsiveActionCreators.geolocation(position);
 		});
 	}
 

@@ -21,8 +21,7 @@ module.exports = {
 	geolocation: function(lat, long) {
 		CatalystDispatcher.handleBrowserAction({
 			type: ActionTypes.GEOLOCATION,
-			latitude: lat,
-			longitude: long
+			position: position
 		});
 	}
 };

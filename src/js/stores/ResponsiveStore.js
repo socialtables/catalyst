@@ -65,9 +65,9 @@ var ResponsiveStore = assign({}, EventEmitter.prototype, {
   setOnDeviceLight: function(lux) {
     _responsiveData.deviceLight = lux;
   },
-  setOnGeolocation: function(lat, long) {
-    _responsiveData.latitude = lat;
-    _responsiveData.longitude = long;
+  setOnGeolocation: function(position) {
+    _responsiveData.latitude = position.coords.latitude;
+    _responsiveData.longitude = position.coords.longitude;
   }
 
 });

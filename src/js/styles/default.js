@@ -19,9 +19,9 @@ module.exports = {
 			latitude: 38.8897,
 			longitude: -77.0089
 		};
-		var oneMileLongOfCap = state.longitude > cap.longitude - 1 && state.longitude < cap.longitude + 1;
-		var oneMileLatOfCap = state.latitude > cap.latitude - 1 && state.latitude < cap.latitude + 1;
-		if(oneMileLongOfCap && oneMileLatOfCap) {
+		var oneDegLongOfCap = state.longitude > cap.longitude - 1 && state.longitude < cap.longitude + 1;
+		var oneDegLatOfCap = state.latitude > cap.latitude - 1 && state.latitude < cap.latitude + 1;
+		if(oneDegLongOfCap && oneDegLatOfCap) {
 			backgroundColor = "green";
 		}
 
