@@ -86,7 +86,7 @@ ResponsiveStore.dispatchToken = CatalystDispatcher.register(function(payload) {
       ResponsiveStore.emitChange();
       break;
     case ActionTypes.GEOLOCATION:
-      ResponsiveStore.setOnGeolocation(action.latitude, action.longitude);
+      ResponsiveStore.setOnGeolocation(action.position);
       ResponsiveStore.emitChange();
       break;
     default:

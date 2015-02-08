@@ -2,7 +2,7 @@ module.exports = {
   displayName: "Catalyst",
   elementType: "div",
   innerElementType: "div",
-  styleSet: require("./styles/default.js"),
+  styleSet: require("./styles/default"),
 
   /* RESPONSIVE BOOLEANS */
   //width is opt-out, all others are opt-in

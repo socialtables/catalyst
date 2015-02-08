@@ -18,7 +18,7 @@ module.exports = {
 			lux: lux
 		});
 	},
-	geolocation: function(lat, long) {
+	geolocation: function(position) {
 		CatalystDispatcher.handleBrowserAction({
 			type: ActionTypes.GEOLOCATION,
 			position: position
