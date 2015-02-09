@@ -5,15 +5,20 @@ var assign = require("react/lib/Object.assign");
 var webpack = require("webpack");
 
 module.exports = function (callback) {
-  var config = assign(
-    {},
-    webpackExamplesConfig("basic-grid"),
-    webpackExamplesConfig("geolocation"),
-    webpackExamplesConfig("device-light"),
-    {
-      devtool: "source-map"
-    }
-  );
+  var examples = [
+    "basic-grid",
+    "geolocation",
+    "device-light"
+  ];
 
-  webpack(config, webpackHandler("build-examples", callback));
+  examples.forEach(function(example){
+    var config = assign(
+      {},
+      webpackExamplesConfig(example),
+      {devtool: "source-map"}
+    );
+
+    webpack(config, webpackHandler("build-"+example, callback));
+  });
+  
 }
