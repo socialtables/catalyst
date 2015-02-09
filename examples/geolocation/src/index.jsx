@@ -1,4 +1,7 @@
-var Catalyst = require("../../../src/js/catalyst.jsx")();
+var Catalyst = require("../../../src/js/catalyst.jsx")({
+	styleSet: require("./styles"),
+	responsiveGeolocation: true
+});
 
 var App = React.createClass({
 	render: function() {

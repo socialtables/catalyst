@@ -18,11 +18,10 @@ module.exports = {
 			lux: lux
 		});
 	},
-	geolocation: function(lat, long) {
+	geolocation: function(position) {
 		CatalystDispatcher.handleBrowserAction({
 			type: ActionTypes.GEOLOCATION,
-			latitude: lat,
-			longitude: long
+			position: position
 		});
 	}
 };
